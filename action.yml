@@ -45,7 +45,7 @@ inputs:
 
 runs:
   using: docker
-  image: Dockerfile
+  image: docker://anishathalye/proof-html:1.0.0
 
 branding:
   icon: check-square
