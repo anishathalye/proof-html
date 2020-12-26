@@ -27,6 +27,9 @@ inputs:
   enforce_https:
     description: Require that links use HTTPS
     required: false
+  tokens:
+    description: JSON-encoded map of domains to authorization tokens
+    required: false
   max_concurrency:
     description: Maximum number of concurrent requests
     required: false
@@ -45,7 +48,7 @@ inputs:
 
 runs:
   using: docker
-  image: docker://anishathalye/proof-html:1.0.0
+  image: docker://anishathalye/proof-html:1.1.0
 
 branding:
   icon: check-square

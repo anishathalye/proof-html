@@ -6,8 +6,7 @@ validate HTML using [HTMLProofer](https://github.com/gjtorikian/html-proofer).
 ## Usage
 
 ```yaml
-- name: Proof HTML
-  uses: anishathalye/proof-html@v1
+- uses: anishathalye/proof-html@v1
   with:
     directory: ./site
 ```
@@ -20,17 +19,38 @@ See below for a [full example](#full-example).
 | --- | --- | --- |
 | `directory` | The directory to scan | **(required)** |
 | `check_external_hash` | Check whether external anchors exist | true |
+| `check_favicon` | Check whether favicons are valid | true |
 | `check_html` | Validate HTML | true |
 | `check_img_http` | Enforce that images use HTTPS | true |
 | `check_opengraph` | Check images and URLs in Open Graph metadata | true |
-| `check_favicon` | Check whether favicons are valid | true |
 | `empty_alt_ignore` | Allow images with empty alt tags | false |
 | `enforce_https` | Require that links use HTTPS | true |
-| `max_concurrency` | Maximum number of concurrent requests | 10 |
+| `url_ignore` | Newline-separated list of URLs to ignore | (empty) |
+| `url_ignore_re` | Newline-separated list of URL regexes to ignore | (empty) |
 | `connect_timeout` | HTTP connection timeout | 30 |
+| `tokens` | JSON-encoded map of domains to authorization tokens | (empty) |
+| `max_concurrency` | Maximum number of concurrent requests | 50 |
 | `timeout` | HTTP request timeout | 120 |
-| `url_ignore` | Newline-separated list of URLs to ignore | (empty string) |
-| `url_ignore_re` | Newline-separated list of URL regexes to ignore | (empty string) |
+
+Most of the options correspond directly to [configuration options for
+HTMLProofer](https://github.com/gjtorikian/html-proofer#configuration).
+
+`tokens` is a _JSON-encoded_ map of domains to authorization tokens. So it's
+"doubly encoded": the workflow file is written in YAML and `tokens` is a string
+(not a map!), a JSON encoding of the data. This option can be used to provide
+bearer tokens to use in certain scenarios, which is useful for e.g. avoiding
+rate limiting. Tokens are only sent to the specified websites. Note that
+domains must not have a trailing slash. Here is an example of an encoding of
+tokens:
+
+```yaml
+tokens: |
+  {"https://github.com": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "https://twitter.com": "yyyyyyyyyyyyyyyyyyyyyyy"}
+```
+
+You can also see the full example below for how to pass on the `GITHUB_TOKEN`
+supplied by the workflow runner.
 
 ## Full Example
 
@@ -65,6 +85,8 @@ jobs:
         with:
           directory: ./_site
           enforce_https: false
+          tokens: |
+            {"https://github.com": "${{ secrets.GITHUB_TOKEN }}"}
           url_ignore: |
             http://www.example.com/
             https://en.wikipedia.org/wiki/Main_Page

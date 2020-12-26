@@ -1,4 +1,6 @@
 require 'html-proofer'
+require 'json'
+require 'uri'
 
 CHROME_FROZEN_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.0.0 Safari/537.36"
 
@@ -23,13 +25,15 @@ def get_int(name, fallback)
   s.to_i
 end
 
-def get_str(name, fallback="")
+def get_str(name)
   s = ENV["INPUT_#{name}"]
-  s.nil? ? fallback : s
+  s.nil? ? "" : s
 end
 
 url_ignore_re = get_str("URL_IGNORE_RE").split("\n").map { |s| Regexp.new s }
 url_ignore = get_str("URL_IGNORE").split("\n").concat url_ignore_re
+tokens_str = get_str("TOKENS")
+tokens = JSON.parse (tokens_str == "" ? "{}" : tokens_str)
 
 options = {
   :check_external_hash => get_bool("CHECK_EXTERNAL_HASH", true),
@@ -40,7 +44,7 @@ options = {
   :empty_alt_ignore => get_bool("EMPTY_ALT_IGNORE", false),
   :enforce_https => get_bool("ENFORCE_HTTPS", true),
   :hydra => {
-    :max_concurrency => get_int("MAX_CONCURRENCY", 10),
+    :max_concurrency => get_int("MAX_CONCURRENCY", 50),
   },
   :typhoeus => {
     :connecttimeout => get_int("CONNECT_TIMEOUT", 30),
@@ -54,7 +58,14 @@ options = {
 }
 
 begin
-  HTMLProofer.check_directory(get_str("DIRECTORY", "."), options).run
+  proofer = HTMLProofer.check_directory(get_str("DIRECTORY"), options)
+  proofer.before_request do |request|
+    uri = URI.parse request.url
+    base = "#{uri.scheme}://#{uri.host}"
+    token = tokens[base]
+    request.options[:headers]['Authorization'] = "Bearer #{token}" unless token.nil?
+  end
+  proofer.run
 rescue => msg
   puts "#{msg}"
 end
