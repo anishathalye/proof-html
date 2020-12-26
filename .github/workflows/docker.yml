@@ -1,0 +1,22 @@
+name: Docker Push
+on:
+  push:
+    tags: ['v*']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: main
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Log in to Docker Hub
+        run: echo $DOCKER_TOKEN | docker login --username=anishathalye --password-stdin
+        env:
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+      - name: Compute tag
+        id: tag
+        run: echo ::set-output name=TAG ::anishathalye/proof-html:${GITHUB_REF#refs/tags/v}
+      - name: Build image
+        run: docker build . -t ${{ steps.tag.outputs.TAG }}
+      - name: Publish image
+        run: docker push ${{ steps.tag.outputs.TAG }}

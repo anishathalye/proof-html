@@ -1,0 +1,52 @@
+name: Proof HTML
+author: anishathalye
+description: Validate your HTML output with HTMLProofer.
+
+inputs:
+  directory:
+    description: The directory to scan
+    required: true
+  check_external_hash:
+    description: Check whether external anchors exist
+    required: false
+  check_html:
+    description: Validate HTML
+    required: false
+  check_img_http:
+    description: Enforce that images use HTTPS
+    required: false
+  check_opengraph:
+    description: Check images and URLs in Open Graph metadata
+    required: false
+  check_favicon:
+    description: Check whether favicons are valid
+    required: false
+  empty_alt_ignore:
+    description: Allow images with empty alt tags
+    required: false
+  enforce_https:
+    description: Require that links use HTTPS
+    required: false
+  max_concurrency:
+    description: Maximum number of concurrent requests
+    required: false
+  connect_timeout:
+    description: HTTP connection timeout
+    required: false
+  timeout:
+    description: HTTP request timeout
+    required: false
+  url_ignore:
+    description: Newline-separated list of URLs to ignore
+    required: false
+  url_ignore_re:
+    description: Newline-separated list of URL regexes to ignore
+    required: false
+
+runs:
+  using: docker
+  image: Dockerfile
+
+branding:
+  icon: check-square
+  color: green
