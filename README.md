@@ -31,6 +31,7 @@ See below for a [full example](#full-example).
 | `tokens` | JSON-encoded map of domains to authorization tokens | (empty) |
 | `max_concurrency` | Maximum number of concurrent requests | 50 |
 | `timeout` | HTTP request timeout | 120 |
+| `retries` | Number of times to retry checking links | 3 |
 
 Most of the options correspond directly to [configuration options for
 HTMLProofer](https://github.com/gjtorikian/html-proofer#configuration).

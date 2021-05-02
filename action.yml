@@ -45,10 +45,13 @@ inputs:
   url_ignore_re:
     description: Newline-separated list of URL regexes to ignore
     required: false
+  retries:
+    description: Number of times to retry checking links
+    required: false
 
 runs:
   using: docker
-  image: docker://anishathalye/proof-html:1.1.0
+  image: docker://anishathalye/proof-html:1.2.0
 
 branding:
   icon: check-square

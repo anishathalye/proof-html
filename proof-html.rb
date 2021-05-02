@@ -36,6 +36,7 @@ tokens_str = get_str("TOKENS")
 tokens = JSON.parse (tokens_str == "" ? "{}" : tokens_str)
 
 options = {
+  :cache => { :timeframe => "1d" },
   :check_external_hash => get_bool("CHECK_EXTERNAL_HASH", true),
   :check_html => get_bool("CHECK_HTML", true),
   :check_img_http => get_bool("CHECK_IMG_HTTP", true),
