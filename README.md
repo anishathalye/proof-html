@@ -100,5 +100,5 @@ For a real-world example, see
 
 ## License
 
-Copyright (c) 2020 Anish Athalye. Released under the MIT License. See
+Copyright (c) 2021 Anish Athalye. Released under the MIT License. See
 [LICENSE.md](LICENSE.md) for details.
