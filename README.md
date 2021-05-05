@@ -95,8 +95,10 @@ jobs:
             ^https://twitter.com/
 ```
 
-For a real-world example, see
-[missing-semester/.../build.yml](https://github.com/missing-semester/missing-semester/blob/master/.github/workflows/build.yml)
+### Real-world examples
+
+- [missing-semester/.../build.yml](https://github.com/missing-semester/missing-semester/blob/master/.github/workflows/build.yml)
+- [dotfiles.github.com/.../build.yml](https://github.com/dotfiles/dotfiles.github.com/blob/master/.github/workflows/build.yml)
 
 ## License
 
