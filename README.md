@@ -97,7 +97,7 @@ jobs:
 
 ### Real-world examples
 
-- [missing-semester/.../build.yml](https://github.com/missing-semester/missing-semester/blob/master/.github/workflows/build.yml)
+- [missing-semester/.../links.yml](https://github.com/missing-semester/missing-semester/blob/master/.github/workflows/links.yml)
 - [dotfiles.github.com/.../build.yml](https://github.com/dotfiles/dotfiles.github.com/blob/master/.github/workflows/build.yml)
 
 ## License
