@@ -34,6 +34,7 @@ url_ignore_re = get_str("URL_IGNORE_RE").split("\n").map { |s| Regexp.new s }
 url_ignore = get_str("URL_IGNORE").split("\n").concat url_ignore_re
 tokens_str = get_str("TOKENS")
 tokens = JSON.parse (tokens_str == "" ? "{}" : tokens_str)
+internal_domains = get_str("INTERNAL_DOMAINS").split("\n")
 
 options = {
   :cache => { :timeframe => "1d" },
@@ -47,6 +48,7 @@ options = {
   :hydra => {
     :max_concurrency => get_int("MAX_CONCURRENCY", 50),
   },
+  :internal_domains => internal_domains,
   :typhoeus => {
     :connecttimeout => get_int("CONNECT_TIMEOUT", 30),
     :followlocation => true,
