@@ -103,6 +103,29 @@ jobs:
 - [missing-semester/.../links.yml](https://github.com/missing-semester/missing-semester/blob/master/.github/workflows/links.yml)
 - [dotfiles.github.com/.../build.yml](https://github.com/dotfiles/dotfiles.github.com/blob/master/.github/workflows/build.yml)
 
+## Running locally
+
+You can build the Docker container locally with `docker build . -t proof-html`.
+
+The GitHub Action is set up to pass arguments as strings through environment
+variables, where an argument like `url_ignore` is passed as `INPUT_URL_IGNORE`
+(capitalize and prepend `INPUT_`) to the Docker container, so you will need to
+do this translation yourself if you're running the Docker container locally.
+You can mount a local directory in the Docker container with the `-v` argument
+and pass the directory name as the `INPUT_DIRECTORY` argument. For example, if
+you compiled a site into the `build` directory, you can run:
+
+```bash
+docker run --rm \
+    -e INPUT_DIRECTORY=build \
+    -v "${PWD}/build:/build" \
+    proof-html:latest
+```
+
+You can pass additional arguments as additional environment variables, e.g.
+`-e INPUT_FORCE_HTTPS=0` or
+`-e INPUT_TOKENS='{"https://github.com": "your-token-here"}'`.
+
 ## License
 
 Copyright (c) 2021 Anish Athalye. Released under the MIT License. See
