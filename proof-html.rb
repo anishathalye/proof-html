@@ -45,6 +45,7 @@ options = {
   :check_favicon => get_bool("CHECK_FAVICON", true),
   :empty_alt_ignore => get_bool("EMPTY_ALT_IGNORE", false),
   :enforce_https => get_bool("ENFORCE_HTTPS", true),
+  :external_only => get_bool("EXTERNAL_ONLY", false),
   :hydra => {
     :max_concurrency => get_int("MAX_CONCURRENCY", 50),
   },

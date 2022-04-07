@@ -25,6 +25,7 @@ See below for a [full example](#full-example).
 | `check_opengraph` | Check images and URLs in Open Graph metadata | true |
 | `empty_alt_ignore` | Allow images with empty alt tags | false |
 | `enforce_https` | Require that links use HTTPS | true |
+| `external_only` | Only check external links | false |
 | `internal_domains` | Newline-separated list of domains to treat as internal URLs | (empty) |
 | `url_ignore` | Newline-separated list of URLs to ignore | (empty) |
 | `url_ignore_re` | Newline-separated list of URL regexes to ignore | (empty) |
