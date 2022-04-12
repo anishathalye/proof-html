@@ -72,4 +72,5 @@ begin
   proofer.run
 rescue => msg
   puts "#{msg}"
+  exit 1
 end
