@@ -1,12 +1,12 @@
-require 'html-proofer'
-require 'json'
-require 'uri'
+require "html-proofer"
+require "json"
+require "uri"
 
 CHROME_FROZEN_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.0.0 Safari/537.36"
 
 def get_bool(name, fallback)
   s = ENV["INPUT_#{name}"]
-  return fallback if s.nil? or s == ''
+  return fallback if s.nil? or s == ""
   case s
   when /^t/i # matches "t", "true", "True"
     true
@@ -21,7 +21,7 @@ end
 
 def get_int(name, fallback)
   s = ENV["INPUT_#{name}"]
-  return fallback if s.nil? or s == ''
+  return fallback if s.nil? or s == ""
   s.to_i
 end
 
@@ -67,7 +67,7 @@ begin
     uri = URI.parse request.url
     base = "#{uri.scheme}://#{uri.host}"
     token = tokens[base]
-    request.options[:headers]['Authorization'] = "Bearer #{token}" unless token.nil?
+    request.options[:headers]["Authorization"] = "Bearer #{token}" unless token.nil?
   end
   proofer.run
 rescue => msg
