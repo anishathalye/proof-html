@@ -1,12 +1,16 @@
 # proof-html
 
 proof-html is a [GitHub Action](https://github.com/features/actions) to
-validate HTML using [HTMLProofer](https://github.com/gjtorikian/html-proofer).
+validate HTML using the [Nu HTML
+Validator](https://github.com/validator/validator) through
+[html5validator](https://github.com/svenkreiss/html5validator), and check
+links, images, and more using
+[HTMLProofer](https://github.com/gjtorikian/html-proofer).
 
 ## Usage
 
 ```yaml
-- uses: anishathalye/proof-html@v1
+- uses: anishathalye/proof-html@v2
   with:
     directory: ./site
 ```
@@ -21,14 +25,12 @@ See below for a [full example](#full-example).
 | `check_external_hash` | Check whether external anchors exist | true |
 | `check_favicon` | Check whether favicons are valid | true |
 | `check_html` | Validate HTML | true |
-| `check_img_http` | Enforce that images use HTTPS | true |
 | `check_opengraph` | Check images and URLs in Open Graph metadata | true |
-| `empty_alt_ignore` | Allow images with empty alt tags | false |
+| `ignore_empty_alt` | Allow images with empty alt tags | false |
 | `enforce_https` | Require that links use HTTPS | true |
-| `external_only` | Only check external links | false |
-| `internal_domains` | Newline-separated list of domains to treat as internal URLs | (empty) |
-| `url_ignore` | Newline-separated list of URLs to ignore | (empty) |
-| `url_ignore_re` | Newline-separated list of URL regexes to ignore | (empty) |
+| `swap_urls` | JSON-encoded map of URL rewrite rules | (empty) |
+| `ignore_url` | Newline-separated list of URLs to ignore | (empty) |
+| `ignore_url_re` | Newline-separated list of URL regexes to ignore | (empty) |
 | `connect_timeout` | HTTP connection timeout | 30 |
 | `tokens` | JSON-encoded map of domains to authorization tokens | (empty) |
 | `max_concurrency` | Maximum number of concurrent requests | 50 |
@@ -37,6 +39,8 @@ See below for a [full example](#full-example).
 
 Most of the options correspond directly to [configuration options for
 HTMLProofer](https://github.com/gjtorikian/html-proofer#configuration).
+
+**tokens**
 
 `tokens` is a _JSON-encoded_ map of domains to authorization tokens. So it's
 "doubly encoded": the workflow file is written in YAML and `tokens` is a string
@@ -54,6 +58,16 @@ tokens: |
 
 You can also see the full example below for how to pass on the `GITHUB_TOKEN`
 supplied by the workflow runner.
+
+**swap_urls**
+
+`swap_urls` is a _JSON-encoded_ map, mapping regexes to strings. This can be
+useful to strip a base path for an internal domain. For example:
+
+```yaml
+swap_urls: |
+  {"^https://example.com/": "/"}
+```
 
 ## Full Example
 
@@ -84,19 +98,19 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
       - run: bundle exec jekyll build
-      - uses: anishathalye/proof-html@v1
+      - uses: anishathalye/proof-html@v2
         with:
           directory: ./_site
           enforce_https: false
           tokens: |
             {"https://github.com": "${{ secrets.GITHUB_TOKEN }}"}
-          url_ignore: |
+          ignore_url: |
             http://www.example.com/
             https://en.wikipedia.org/wiki/Main_Page
-          url_ignore_re: |
+          ignore_url_re: |
             ^https://twitter.com/
-          internal_domains: |
-            www.anishathalye.com
+          swap_urls: |
+            {"^https://www.anishathalye.com/": "/"}
 ```
 
 ### Real-world examples

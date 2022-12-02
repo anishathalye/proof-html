@@ -30,26 +30,35 @@ def get_str(name)
   s.nil? ? "" : s
 end
 
-url_ignore_re = get_str("URL_IGNORE_RE").split("\n").map { |s| Regexp.new s }
-url_ignore = get_str("URL_IGNORE").split("\n").concat url_ignore_re
+ignore_url_re = get_str("IGNORE_URL_RE").split("\n").map { |s| Regexp.new s }
+ignore_url = get_str("IGNORE_URL").split("\n").concat ignore_url_re
 tokens_str = get_str("TOKENS")
 tokens = JSON.parse (tokens_str == "" ? "{}" : tokens_str)
-internal_domains = get_str("INTERNAL_DOMAINS").split("\n")
+
+swap_urls_str = get_str("SWAP_URLS")
+swap_urls = JSON.parse (swap_urls_str == "" ? "{}" : swap_urls_str)
+swap_urls.transform_keys! { |k| Regexp.new k }
+
+checks = ["Links", "Scripts", "Images"]
+if get_bool("CHECK_FAVICON", true)
+  checks.push("Favicon")
+end
+if get_bool("CHECK_OPENGRAPH", true)
+  checks.push("OpenGraph")
+end
 
 options = {
-  :cache => { :timeframe => "1d" },
+  :checks => checks,
+  :cache => { :timeframe => {
+    :internal => "1d",
+    :external => "1d",
+  } },
   :check_external_hash => get_bool("CHECK_EXTERNAL_HASH", true),
-  :check_html => get_bool("CHECK_HTML", true),
-  :check_img_http => get_bool("CHECK_IMG_HTTP", true),
-  :check_opengraph => get_bool("CHECK_OPENGRAPH", true),
-  :check_favicon => get_bool("CHECK_FAVICON", true),
-  :empty_alt_ignore => get_bool("EMPTY_ALT_IGNORE", false),
+  :ignore_empty_alt => get_bool("IGNORE_EMPTY_ALT", false),
   :enforce_https => get_bool("ENFORCE_HTTPS", true),
-  :external_only => get_bool("EXTERNAL_ONLY", false),
   :hydra => {
     :max_concurrency => get_int("MAX_CONCURRENCY", 50),
   },
-  :internal_domains => internal_domains,
   :typhoeus => {
     :connecttimeout => get_int("CONNECT_TIMEOUT", 30),
     :followlocation => true,
@@ -58,7 +67,8 @@ options = {
     },
     :timeout => get_int("TIMEOUT", 120),
   },
-  :url_ignore => url_ignore,
+  :ignore_urls => ignore_url,
+  :swap_urls => swap_urls,
 }
 
 begin
