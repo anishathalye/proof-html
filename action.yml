@@ -21,6 +21,9 @@ inputs:
   ignore_empty_alt:
     description: Allow images with empty alt tags
     required: false
+  allow_missing_href:
+    description: Allow anchors with missing href tags
+    required: false
   enforce_https:
     description: Require that links use HTTPS
     required: false
@@ -51,7 +54,7 @@ inputs:
 
 runs:
   using: docker
-  image: docker://anishathalye/proof-html:2.0.1
+  image: docker://anishathalye/proof-html:2.0.2
 
 branding:
   icon: check-square

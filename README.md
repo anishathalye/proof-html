@@ -27,6 +27,7 @@ See below for a [full example](#full-example).
 | `check_html` | Validate HTML | true |
 | `check_opengraph` | Check images and URLs in Open Graph metadata | true |
 | `ignore_empty_alt` | Allow images with empty alt tags | false |
+| `allow_missing_href` | Allow anchors with missing href tags | false |
 | `enforce_https` | Require that links use HTTPS | true |
 | `swap_urls` | JSON-encoded map of URL rewrite rules | (empty) |
 | `ignore_url` | Newline-separated list of URLs to ignore | (empty) |

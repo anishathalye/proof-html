@@ -55,6 +55,7 @@ options = {
   } },
   :check_external_hash => get_bool("CHECK_EXTERNAL_HASH", true),
   :ignore_empty_alt => get_bool("IGNORE_EMPTY_ALT", false),
+  :allow_missing_href => get_bool("ALLOW_MISSING_HREF", false),
   :enforce_https => get_bool("ENFORCE_HTTPS", true),
   :hydra => {
     :max_concurrency => get_int("MAX_CONCURRENCY", 50),
