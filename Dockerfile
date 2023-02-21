@@ -6,7 +6,7 @@ RUN gem install html-proofer -v 5.0.3
 
 RUN apk --no-cache add python3 py3-pip
 RUN apk --no-cache add openjdk8
-RUN pip install html5validator
+RUN pip install 'html5validator==0.4.2'
 
 RUN apk --no-cache add bash
 
