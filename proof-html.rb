@@ -61,6 +61,8 @@ options = {
     :max_concurrency => get_int("MAX_CONCURRENCY", 50),
   },
   :typhoeus => {
+    :cookiefile => ".cookies",
+    :cookiejar => ".cookies",
     :connecttimeout => get_int("CONNECT_TIMEOUT", 30),
     :followlocation => true,
     :headers => {
