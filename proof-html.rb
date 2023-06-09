@@ -51,6 +51,8 @@ options = {
   },
   :internal_domains => internal_domains,
   :typhoeus => {
+    :cookiefile => ".cookies",
+    :cookiejar => ".cookies",
     :connecttimeout => get_int("CONNECT_TIMEOUT", 30),
     :followlocation => true,
     :headers => {
