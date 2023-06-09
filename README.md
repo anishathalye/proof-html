@@ -124,7 +124,7 @@ jobs:
 You can build the Docker container locally with `docker build . -t proof-html`.
 
 The GitHub Action is set up to pass arguments as strings through environment
-variables, where an argument like `url_ignore` is passed as `INPUT_URL_IGNORE`
+variables, where an argument like `ignore_url` is passed as `INPUT_IGNORE_URL`
 (capitalize and prepend `INPUT_`) to the Docker container, so you will need to
 do this translation yourself if you're running the Docker container locally.
 You can mount a local directory in the Docker container with the `-v` argument
