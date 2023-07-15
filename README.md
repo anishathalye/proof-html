@@ -71,6 +71,15 @@ swap_urls: |
   {"^https://example.com/": "/"}
 ```
 
+You can also use capture groups and back-references here. For example, to
+ignore checking hashes for GitHub URLs (like
+`https://github.com/anishathalye/proof-html#options`), you can use:
+
+```yaml
+swap_urls: |
+  {"^(https://github.com/.*)#.*$": "\\1"}
+```
+
 ## Full Example
 
 This is the entire `.github/workflows/build.yml` file for a GitHub Pages /
