@@ -16,7 +16,7 @@ See below for a [full example](#full-example).
 
 | Name | Description | Default |
 | --- | --- | --- |
-| `directory` | The directory to scan | **(required)** |
+| `directory` | The directory to scan | (required) |
 | `check_external_hash` | Check whether external anchors exist | true |
 | `check_favicon` | Check whether favicons are valid | true |
 | `check_html` | Validate HTML | true |
