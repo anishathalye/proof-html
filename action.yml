@@ -12,6 +12,9 @@ inputs:
   check_html:
     description: Validate HTML
     required: false
+  check_css:
+    description: Validate CSS
+    required: false
   check_opengraph:
     description: Check images and URLs in Open Graph metadata
     required: false
@@ -57,7 +60,7 @@ inputs:
 
 runs:
   using: docker
-  image: docker://anishathalye/proof-html:2.1.1
+  image: docker://anishathalye/proof-html:2.1.2
 
 branding:
   icon: check-square

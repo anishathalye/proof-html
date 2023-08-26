@@ -4,7 +4,12 @@ failed=0
 
 check_html="${INPUT_CHECK_HTML:-true}"
 if [[ "$check_html" =~ ^t.*|^T.*|^y.*|^Y.*|^1.* ]]; then
-  if ! java -jar /bin/vnu.jar --errors-only --skip-non-html --also-check-css "${INPUT_DIRECTORY}"; then
+  check_css="${INPUT_CHECK_CSS:-true}"
+  check_css_arg=""
+  if [[ "$check_css" =~ ^t.*|^T.*|^y.*|^Y.*|^1.* ]]; then
+      check_css_arg="--also-check-css"
+  fi
+  if ! java -jar /bin/vnu.jar --errors-only --skip-non-html ${check_css_arg} "${INPUT_DIRECTORY}"; then
     failed=1
   fi
 fi

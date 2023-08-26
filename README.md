@@ -20,6 +20,7 @@ See below for a [full example](#full-example).
 | `check_external_hash` | Check whether external anchors exist | true |
 | `check_favicon` | Check whether favicons are valid | true |
 | `check_html` | Validate HTML | true |
+| `check_css` | Validate CSS | true |
 | `check_opengraph` | Check images and URLs in Open Graph metadata | true |
 | `ignore_empty_alt` | Allow images with empty alt tags | false |
 | `ignore_missing_alt` | Allow images with missing alt tags | false |
