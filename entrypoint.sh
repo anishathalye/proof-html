@@ -13,7 +13,7 @@ tries="${INPUT_RETRIES:-3}"
 
 while [ "$tries" -ge 1 ]; do
   tries=$((tries-1))
-  if ruby /proof-html.rb; then
+  if RUBYOPT="-W0" ruby /proof-html.rb; then
     break
   fi
   if [ "$tries" -ge 1 ]; then
