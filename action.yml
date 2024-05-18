@@ -60,7 +60,7 @@ inputs:
 
 runs:
   using: docker
-  image: docker://anishathalye/proof-html:2.1.2
+  image: docker://anishathalye/proof-html:2.1.3
 
 branding:
   icon: check-square
