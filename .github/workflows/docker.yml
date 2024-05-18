@@ -8,7 +8,7 @@ jobs:
     environment: main
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Log in to Docker Hub
         run: echo $DOCKER_TOKEN | docker login --username=anishathalye --password-stdin
         env:
