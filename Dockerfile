@@ -13,7 +13,7 @@ RUN git clone -n https://github.com/validator/validator.git \
 
 FROM base
 
-RUN apk --no-cache add build-base ruby-dev
+RUN apk --no-cache add build-base linux-headers ruby-dev
 RUN apk --no-cache add curl
 RUN gem install html-proofer -v 5.0.8
 
