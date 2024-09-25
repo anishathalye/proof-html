@@ -71,6 +71,7 @@ options = {
     },
     :timeout => get_int("TIMEOUT", 120),
   },
+  :disable_external => get_bool("DISABLE_EXTERNAL", false),
   :ignore_urls => ignore_url,
   :swap_urls => swap_urls,
 }
