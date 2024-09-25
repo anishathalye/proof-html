@@ -27,6 +27,7 @@ See below for a [full example](#full-example).
 | `allow_missing_href` | Allow anchors with missing href tags | false |
 | `enforce_https` | Require that links use HTTPS | true |
 | `swap_urls` | JSON-encoded map of URL rewrite rules | (empty) |
+| `disable_external` | Disables the external link checker | false
 | `ignore_url` | Newline-separated list of URLs to ignore | (empty) |
 | `ignore_url_re` | Newline-separated list of URL regexes to ignore | (empty) |
 | `connect_timeout` | HTTP connection timeout | 30 |
