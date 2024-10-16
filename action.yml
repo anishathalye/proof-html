@@ -48,6 +48,9 @@ inputs:
   timeout:
     description: HTTP request timeout
     required: false
+  disable_external:
+    description: Disables the external link checker
+    required: false
   ignore_url:
     description: Newline-separated list of URLs to ignore
     required: false
