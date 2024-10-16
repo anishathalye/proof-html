@@ -1,8 +1,8 @@
-FROM alpine:3.19 as base
+FROM alpine:3.19 AS base
 
 RUN apk --no-cache add openjdk11
 
-FROM base as build-vnu
+FROM base AS build-vnu
 
 RUN apk add git python3
 
