@@ -65,7 +65,7 @@ useful to strip a base path for an internal domain. For example:
 
 ```yaml
 swap_urls: |
-  {"^https://example.com/": "/"}
+  {"^https:\\/\\/example\\.com\\/": "/"}
 ```
 
 You can also use capture groups and back-references here. For example, to
@@ -74,7 +74,7 @@ ignore checking hashes for GitHub URLs (like
 
 ```yaml
 swap_urls: |
-  {"^(https://github.com/.*)#.*$": "\\1"}
+  {"^(https:\\/\\/github\\.com\\/.*)#.*$": "\\1"}
 ```
 
 ## Full Example
