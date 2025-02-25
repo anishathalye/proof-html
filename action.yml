@@ -1,19 +1,22 @@
 name: Proof HTML
 author: anishathalye
-description: Validate your HTML output with HTMLProofer.
+description: Validate your HTML and CSS and check for broken links.
 
 inputs:
   directory:
     description: The directory to scan
     required: true
-  check_external_hash:
-    description: Check whether external anchors exist
-    required: false
   check_html:
     description: Validate HTML
     required: false
   check_css:
     description: Validate CSS
+    required: false
+  validator_ignore:
+    description: Regex of HTML/CSS validator errors to ignore
+    required: false
+  check_external_hash:
+    description: Check whether external anchors exist
     required: false
   check_opengraph:
     description: Check images and URLs in Open Graph metadata
@@ -63,7 +66,7 @@ inputs:
 
 runs:
   using: docker
-  image: docker://anishathalye/proof-html:2.1.4
+  image: docker://anishathalye/proof-html:2.2.0
 
 branding:
   icon: check-square

@@ -9,7 +9,7 @@ if [[ "$check_html" =~ ^t.*|^T.*|^y.*|^Y.*|^1.* ]]; then
   if [[ "$check_css" =~ ^t.*|^T.*|^y.*|^Y.*|^1.* ]]; then
       check_css_arg="--also-check-css"
   fi
-  if ! java -jar /bin/vnu.jar --errors-only --skip-non-html ${check_css_arg} "${INPUT_DIRECTORY}"; then
+  if ! java -jar /bin/vnu.jar --errors-only --filterpattern "${INPUT_VALIDATOR_IGNORE}" --skip-non-html ${check_css_arg} "${INPUT_DIRECTORY}"; then
     failed=1
   fi
 fi
