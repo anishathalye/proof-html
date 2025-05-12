@@ -8,7 +8,7 @@ RUN apk add git python3
 
 RUN git clone -n https://github.com/validator/validator.git \
     && cd validator \
-    && git checkout fbb989ff924bb4a16a1b8162e8e61f46ca9caa85 \
+    && git checkout 5cd4ab85fb7d175540febd82a71b7a03079eed3f \
     && JAVA_HOME=/usr/lib/jvm/java-21-openjdk python checker.py update-shallow dldeps build jar
 
 FROM base
