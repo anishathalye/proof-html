@@ -1,5 +1,5 @@
 name: Proof HTML
-author: anishathalye
+author: AliceFosseneuve
 description: Validate your HTML output with HTMLProofer.
 
 inputs:
